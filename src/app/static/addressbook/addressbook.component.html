@@ -1,0 +1,26 @@
+<div class="background">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="main-heading">Address Book</h1>
+      </div>
+    </div>
+    <div class="row align-items-end">
+      
+      <div class="col-md-12 col-lg-12" [ngClass]="routeAnimationsElements">
+        <mat-card>
+          <mat-card-title>Сo-workers</mat-card-title>
+          <input #search class="search" type="text" placeholder="Search..." (keydown.enter)="onSearch(search.value)">
+          <ng2-smart-table [settings]="settings" [source]="source" (userRowSelect)="onSelectRow($event)"></ng2-smart-table>
+        </mat-card>
+      </div>
+      <div class="col-md-6 col-lg-4" [ngClass]="routeAnimationsElements">
+        <mat-card>
+          <mat-card-title>Detail of person:</mat-card-title>
+            <detail [item]="selectedItem"></detail>
+        </mat-card>
+      </div>
+
+    </div>
+  </div>
+</div>
