@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { environment as env } from '@env/environment';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '@app/core';
 import { DataService } from '../../core/services/data.service';
+import {Subject} from "rxjs/Subject";
+import 'rxjs/add/operator/takeUntil';
 
 @Component({
   selector: 'anms-addressbook',
@@ -11,6 +13,7 @@ import { DataService } from '../../core/services/data.service';
 })
 export class AddressbookComponent implements OnInit {
 
+  componentDestroyed$: Subject<boolean> = new Subject();//for unsubscribe observers
   constructor(private dataService: DataService) {}
 
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
@@ -53,20 +56,14 @@ export class AddressbookComponent implements OnInit {
   }
 
   ngOnInit() {
-    /*let a = [{name: "Poll Verhoven", phone: 1223003, email:"www@com", isActive:true, age: 45, address: 'sasasa'},
-             {name: "Bill Gates", phone: 55888, email:"gares@com", isActive:false, age: 35, address: 'qwqwqwq'},
-             {name: "Dart Veader", phone: 93128, email:"dart@com", isActive:true, age: 25, address: 'xzxzxzxz'},
-             {name: "Joe Kokker", phone: 887445569, email:"joe@com", isActive:false, age: 70, address: 'fdfdfdf'},
-             {name: "Freddy Kruger", phone: 534478, email:"freddy@com", isActive:true, age: 69, address: 'fgfgfgf'},
-             {name: "Be Jeas", phone: 1234158, email:"bee@com", isActive:true, age: 55, address: 'jkjkjkj'},
-             {name: "Tom Crouse", phone: 934682, email:"tom@com", isActive:true, age: 50, address: 'nbnbnbnb'}];
-             */
     this.showADUsersList();
     //this.source.load(a);
   }
 
   showADUsersList(){
-    this.dataService.getADUsers().subscribe(
+    this.dataService.getADUsers()
+    .takeUntil(this.componentDestroyed$)
+    .subscribe(
       data => {this.source = new LocalDataSource(data);}
     )
   }
@@ -99,5 +96,10 @@ export class AddressbookComponent implements OnInit {
 
   onSelectRow(e: any) {
     this.selectedItem = e.data;
-}
+  }
+
+  ngOnDestroy() {
+      this.componentDestroyed$.next(true);
+      this.componentDestroyed$.complete();
+  }
 }
