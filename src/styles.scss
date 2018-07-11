@@ -58,3 +58,7 @@
   @include angular-material-theme($anms-nature-theme);
   @include custom-components-theme($anms-nature-theme);
 }
+
+td {
+  padding: 0.2em 0.1em !important;
+}

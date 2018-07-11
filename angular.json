@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-ngrx-material-starter": {
+    "angular-ngrx-addressbook": {
       "root": "",
       "sourceRoot": "/src",
       "projectType": "application",
@@ -60,18 +60,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-ngrx-material-starter:build"
+            "browserTarget": "angular-ngrx-addressbook:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular-ngrx-material-starter:build:production"
+              "browserTarget": "angular-ngrx-addressbook:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-ngrx-material-starter:build"
+            "browserTarget": "angular-ngrx-addressbook:build"
           }
         },
         "test": {
@@ -126,7 +126,7 @@
         }
       }
     },
-    "angular-ngrx-material-starter-e2e": {
+    "angular-ngrx-addressbook-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -134,7 +134,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "angular-ngrx-material-starter:serve"
+            "devServerTarget": "angular-ngrx-addressbook:serve"
           }
         },
         "lint": {
@@ -149,5 +149,5 @@
       }
     }
   },
-  "defaultProject": "angular-ngrx-material-starter"
+  "defaultProject": "angular-ngrx-addressbook"
 }

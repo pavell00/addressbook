@@ -6,11 +6,14 @@
 }
 
 mat-card {
+  padding: 10px;
+  border-radius: 7px;
+  opacity: 0.9;
   margin: 0 0 20px 0;
 
   mat-card-title {
     position: relative;
-
+    
     code {
       position: absolute;
       top: 11px;
@@ -62,5 +65,3 @@ mat-card {
   }
 
 }
-
-

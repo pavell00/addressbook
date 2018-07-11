@@ -7,13 +7,13 @@ import { AddressbookComponent } from './addressbook/addressbook.component';
 
 const routes: Routes = [
   {
-    path: 'about', component: AboutComponent, data: { title: 'About' }
+    path: 'addressbook', component: AddressbookComponent, data: { title: 'addressbook' }
   },
   {
     path: 'features', component: FeaturesComponent, data: { title: 'Features' }
   },
   {
-    path: 'addressbook', component: AddressbookComponent, data: { title: 'addressbook' }
+    path: 'about', component: AboutComponent, data: { title: 'About' }
   }
 ];
 

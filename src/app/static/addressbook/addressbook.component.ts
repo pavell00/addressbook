@@ -44,6 +44,10 @@ export class AddressbookComponent implements OnInit {
       Title: {
         title: "Title",
         filter: false
+      },
+      EmailAddress: {
+        title: "Email",
+        filter: false
       }
     }
   }
@@ -71,20 +75,24 @@ export class AddressbookComponent implements OnInit {
     this.source.setFilter([
         // fields we want to include in the search
         {
-        field: 'Name',
-        search: query
+          field: 'Name',
+          search: query
         },
         {
-        field: 'MobilePhone',
-        search: query
+          field: 'MobilePhone',
+          search: query
         },
         {
-        field: 'Office',
-        search: query
+          field: 'Office',
+          search: query
         },
         {
-        field: 'Title',
-        search: query
+          field: 'Title',
+          search: query
+        },
+        {
+          field: 'EmailAddress',
+          search: query
         }
     ], false); 
   }
