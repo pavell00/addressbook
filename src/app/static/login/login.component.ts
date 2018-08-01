@@ -30,6 +30,10 @@ export class LoginComponent implements OnInit {
     submitted = false;
     returnUrl: string;
 
+    username: string;
+    password: string;
+    showSpinner: boolean = false;
+
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
