@@ -2,7 +2,7 @@ import browser from 'browser-detect';
 import { Title } from '@angular/platform-browser';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
-import { ActivationEnd, Router, NavigationEnd } from '@angular/router';
+import { ActivationEnd, Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
@@ -56,7 +56,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private store: Store<any>,
     private router: Router,
     private titleService: Title,
-    private animationService: AnimationsService
+    private animationService: AnimationsService,
+    private route: ActivatedRoute
   ) {}
 
   private static trackPageView(event: NavigationEnd) {
@@ -80,10 +81,12 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   onLoginClick() {
+    //this.router.navigateByUrl('login');
     this.store.dispatch(new ActionAuthLogin());
   }
 
   onLogoutClick() {
+    this.router.navigateByUrl('login');
     this.store.dispatch(new ActionAuthLogout());
   }
 

@@ -14,7 +14,7 @@ import { authReducer } from './auth/auth.reducer';
 import { AuthEffects } from './auth/auth.effects';
 import { AuthGuardService } from './auth/auth-guard.service';
 import { AnimationsService } from './animations/animations.service';
-import { DataService } from '../core/services/data.service';
+import { DataService } from './services/data.service';
 
 export const metaReducers: MetaReducer<any>[] = [initStateFromLocalStorage];
 

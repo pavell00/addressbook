@@ -2,10 +2,21 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { SettingsComponent } from './settings';
+import { LoginComponent } from './static';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'login',
+    //redirectTo: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'about',
+    redirectTo: 'about',
+    pathMatch: 'full'
+  },
+  {
+    path: 'addressbook',
     redirectTo: 'addressbook',
     pathMatch: 'full'
   },
@@ -22,13 +33,12 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'about'
+    redirectTo: 'login'
   }
 ];
 
 @NgModule({
-  // useHash supports github.io demo page, remove in your app
-  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
