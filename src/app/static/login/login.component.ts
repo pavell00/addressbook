@@ -5,6 +5,14 @@ import { DataService } from '../../core/services/data.service';
 import {Subject} from "rxjs/Subject";
 import { environment as env } from '@env/environment';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '@app/core';
+import { Store } from '@ngrx/store';
+import {
+    ActionAuthLogin,
+    ActionAuthLogout,
+    AnimationsService,
+    selectorAuth,
+    routeAnimations
+  } from '@app/core';
 
 @Component({
     selector: 'anms-login',
@@ -25,7 +33,8 @@ export class LoginComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        private store: Store<any>,
         //private authenticationService: AuthenticationService,
         //private alertService: AlertService
     ) { }
@@ -47,6 +56,7 @@ export class LoginComponent implements OnInit {
     get f() { return this.loginForm.controls; }
     
     login() {
+        this.store.dispatch(new ActionAuthLogin());
         this.router.navigateByUrl('addressbook');
     }
 }
