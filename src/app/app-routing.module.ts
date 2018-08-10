@@ -2,13 +2,17 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { SettingsComponent } from './settings';
-import { LoginComponent } from './static';
+import { LoginComponent, RegisterComponent } from './static';
 
 const routes: Routes = [
   {
     path: 'login',
     //redirectTo: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   },
   {
     path: 'about',

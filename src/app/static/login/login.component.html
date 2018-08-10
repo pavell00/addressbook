@@ -1,22 +1,18 @@
-<mat-card class="example-card">
+<mat-card class="login-card">
     <mat-card-header>
       <mat-card-title>Login</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <form class="example-form">
-        <table class="example-full-width" cellspacing="0">
-          <tr>
-            <td>
-              <mat-form-field class="example-full-width">
-              <input matInput placeholder="Username" [(ngModel)]="username" name="username" required>
-              </mat-form-field>
-            </td>
-          </tr>
-          <tr>
-          <td><mat-form-field class="example-full-width">
-            <input matInput placeholder="Password" [(ngModel)]="password"type="password" name="password" required>
-          </mat-form-field></td>
-        </tr></table>
+      <form class="example-form" #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <mat-form-field>
+          <input matInput placeholder="Enter your user name" ngModel name="username" required minlength="4" #userInput="ngModel">
+          <mat-error *ngIf="userInput.hasError('required')">Field must not empty.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="password" matInput placeholder="Your password" ngModel name="password" required minlength="6" #pwInput="ngModel">
+          <mat-hint align="end">{{pwInput.value?.length}}/ 6</mat-hint>
+          <mat-error>Has to be at least 6 characters long.</mat-error>
+        </mat-form-field>
       </form>
       <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
     </mat-card-content>

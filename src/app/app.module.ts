@@ -10,6 +10,7 @@ import { StaticModule } from './static';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   imports: [
@@ -26,7 +27,9 @@ import { AppComponent } from './app.component';
     SettingsModule,
 
     // app
-    AppRoutingModule
+    AppRoutingModule,
+
+    FlexLayoutModule
   ],
   declarations: [AppComponent],
   providers: [],
