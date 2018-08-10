@@ -13,6 +13,7 @@ import {
     selectorAuth,
     routeAnimations
   } from '@app/core';
+import { User } from '../../shared';
 
 @Component({
     selector: 'anms-login',
@@ -33,6 +34,7 @@ export class LoginComponent implements OnInit {
     username: string;
     password: string;
     showSpinner: boolean = false;
+    user: User = new User();
 
     constructor(
         private formBuilder: FormBuilder,
@@ -44,10 +46,10 @@ export class LoginComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.loginForm = this.formBuilder.group({
+        /*this.loginForm = this.formBuilder.group({
             username: ['', Validators.required],
             password: ['', Validators.required]
-        });
+        });*/
 
         // reset login status
         //this.authenticationService.logout();
@@ -57,9 +59,14 @@ export class LoginComponent implements OnInit {
     }
 
     // convenience getter for easy access to form fields
-    get f() { return this.loginForm.controls; }
+    //get f() { return this.loginForm.controls; }
     
-    login() {
+    onSubmit(form: NgForm) {
+        //console.log(form);
+        this.user = {username: form.value.username,
+                    password: form.value.password
+        }
+        //console.log(this.user);
         this.store.dispatch(new ActionAuthLogin());
         this.router.navigateByUrl('addressbook');
     }

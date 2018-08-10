@@ -1,7 +1,7 @@
 <section class="register-card">
     <form  fxLayout="column" fxLayoutAlign="center center" #f="ngForm" (ngSubmit)="onSubmit(f)">
         <mat-form-field>
-            <input type="text" matInput placeholder="Enter your user name" ngModel name="userName" required minlength="4" #userInput="ngModel">
+            <input type="text" matInput placeholder="Enter your user name" ngModel name="username" required minlength="4" #userInput="ngModel">
             <mat-error *ngIf="userInput.hasError('required')">Must be more than 3 characters.</mat-error>
         </mat-form-field>
         <mat-form-field>
