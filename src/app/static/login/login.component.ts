@@ -7,8 +7,8 @@ import { environment as env } from '@env/environment';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '@app/core';
 import { Store } from '@ngrx/store';
 import {
-    ActionAuthLogin,
-    ActionAuthLogout,
+    Login,
+    Logout,
     AnimationsService,
     selectorAuth,
     routeAnimations
@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
                     password: form.value.password
         }*/
         //console.log(this.user);
-        this.store.dispatch(new ActionAuthLogin(payload));
+        this.store.dispatch(new Login(payload));
         this.router.navigateByUrl('addressbook');
     }
 }

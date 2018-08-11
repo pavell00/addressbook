@@ -17,7 +17,7 @@ export class AuthEffects {
     private actions$: Actions<Action>,
     private localStorageService: LocalStorageService,
     private router: Router,
-    private authServie: DataService
+    private dataService: DataService
   ) {}
 
   @Effect({ dispatch: false })
@@ -25,11 +25,43 @@ export class AuthEffects {
     return this.actions$
       .ofType(AuthActionTypes.LOGIN)
       .pipe(
+        tap((action: any) => {action.payload}),
         tap(action =>
           this.localStorageService.setItem(AUTH_KEY, { isAuthenticated: true })
-        )
-      );
+        ),
+        map((action: any) => action.payload),
+        switchMap(payload => {
+          return this.dataService.logIn(payload.email, payload.password).pipe(
+            tap((user) => {
+              console.log(user);
+            }))
+            
+              //return new LogInSuccess({token: user.token, email: payload.email});
+            })
+            /*.catch((error) => {
+              console.log(error);
+              return Observable.of(new LogInFailure({ error: error }));
+            });*/
+        );
   }
+  
+  
+  @Effect({ dispatch: false })
+  LogInSuccess(): Observable<any> { 
+    return this.actions$
+    .ofType(AuthActionTypes.LOGIN_SUCCESS)
+    .pipe(
+      tap((user) => {
+        localStorage.setItem('token', user.payload.token);
+        this.router.navigateByUrl('/addressbook');
+      })
+  );
+}
+
+@Effect({ dispatch: false })
+LogInFailure(): Observable<any> {
+  return this.actions$.ofType(AuthActionTypes.LOGIN_FAILURE);
+}
 
 /*  @Effect()
   LogIn: Observable<any> = this.actions$

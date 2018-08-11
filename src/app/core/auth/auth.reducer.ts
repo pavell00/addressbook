@@ -10,7 +10,7 @@ export enum AuthActionTypes {
   LOGOUT = '[Auth] Logout',
 }
 
-export class ActionAuthLogin implements Action {
+export class Login implements Action {
   readonly type = AuthActionTypes.LOGIN;
   constructor(public payload: any) {}
 }
@@ -20,11 +20,16 @@ export class LogInSuccess implements Action {
   constructor(public payload: any) {}
 }
 
-export class ActionAuthLogout implements Action {
+export class LogInFailure implements Action {
+  readonly type = AuthActionTypes.LOGIN_FAILURE;
+  constructor(public payload: any) {}
+}
+
+export class Logout implements Action {
   readonly type = AuthActionTypes.LOGOUT;
 }
 
-export type AuthActions = ActionAuthLogin | ActionAuthLogout | LogInSuccess;
+export type AuthActions = Login|Logout|LogInSuccess|LogInFailure;
 
 export const initialState: AuthState = {
   isAuthenticated: false,
@@ -41,7 +46,23 @@ export function authReducer(
   switch (action.type) {
     case AuthActionTypes.LOGIN:
       return { ...state, isAuthenticated: true };
-
+    case AuthActionTypes.LOGIN_SUCCESS: {
+      return {
+        ...state,
+        isAuthenticated: true,
+        user: {
+          token: action.payload.token,
+          email: action.payload.email
+        },
+        errorMessage: null
+      };
+    }
+    case AuthActionTypes.LOGIN_FAILURE: {
+      return {
+        ...state,
+        errorMessage: 'Incorrect email and/or password.'
+      };
+    }
     case AuthActionTypes.LOGOUT:
       return { ...state, isAuthenticated: false };
 

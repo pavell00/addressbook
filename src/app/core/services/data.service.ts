@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse, HttpParams } from '@angular/common/http';
 import { Employee } from '../_models';
 
 import {Observable} from 'rxjs';
@@ -23,8 +23,14 @@ export class DataService {
   }
 
   logIn(email: string, password: string): Observable<any> {
+    const body = new HttpParams ()
+      .set('login', email)
+      .set('password', password);
+    
     const url = `${this.BASE_URL}/login`;
-    return this.http.post<User>(url, {email, password});
+    //return this.http.post<User>(url, {email, password});
+    return this.http.post<User>(url, body.toString(), {
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }});
   }
 
   signUp(email: string, password: string): Observable<User> {
