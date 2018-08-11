@@ -58,11 +58,15 @@ export class LoginComponent implements OnInit {
     
     onSubmit(form: NgForm) {
         //console.log(form);
-        this.user = {username: form.value.username,
+        const payload = {
+            email: form.value.username,
+            password: form.value.password
+        };
+        /*this.user = {username: form.value.username,
                     password: form.value.password
-        }
+        }*/
         //console.log(this.user);
-        this.store.dispatch(new ActionAuthLogin());
+        this.store.dispatch(new ActionAuthLogin(payload));
         this.router.navigateByUrl('addressbook');
     }
 }
