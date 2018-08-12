@@ -6,10 +6,11 @@ import { Observable } from 'rxjs';
 import { map, switchMap, throttle } from 'rxjs/operators';
 import { tap } from 'rxjs/operators';
 
-import { LocalStorageService } from '../local-storage/local-storage.service';
-import { DataService } from '../services/data.service';
+import { LocalStorageService } from '../../local-storage/local-storage.service';
+import { DataService } from '../../services/data.service';
 
-import { AUTH_KEY, AuthActionTypes } from './auth.reducer';
+import { AUTH_KEY } from '../reducers/auth.reducer';
+import { AuthActionTypes, Login, LogInFailure, LogInSuccess, Logout, AuthActions } from '../actions/auth.actions';
 
 @Injectable()
 export class AuthEffects {
