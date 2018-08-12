@@ -8,8 +8,7 @@ import { Subject } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
 
 import {
-  Login,
-  Logout,
+  LogOut,
   AnimationsService,
   selectorAuth,
   routeAnimations
@@ -87,7 +86,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   onLogoutClick() {
     //this.router.navigateByUrl('login');
-    this.store.dispatch(new Logout());
+    this.store.dispatch(new LogOut());
   }
 
   private subscribeToIsAuthenticated() {

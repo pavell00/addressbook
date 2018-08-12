@@ -7,7 +7,7 @@ export enum AuthActionTypes {
     LOGOUT = '[Auth] Logout',
 }
 
-export class Login implements Action {
+export class LogIn implements Action {
 readonly type = AuthActionTypes.LOGIN;
 constructor(public payload: any) {}
 }
@@ -22,8 +22,8 @@ readonly type = AuthActionTypes.LOGIN_FAILURE;
 constructor(public payload: any) {}
 }
 
-export class Logout implements Action {
+export class LogOut implements Action {
 readonly type = AuthActionTypes.LOGOUT;
 }
 
-export type AuthActions = Login|Logout|LogInSuccess|LogInFailure;
+export type AuthActions = LogIn|LogOut|LogInSuccess|LogInFailure;

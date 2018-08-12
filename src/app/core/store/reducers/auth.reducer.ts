@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import { User } from '../../../shared/user';
-import { AuthActionTypes, AuthActions,Login, LogInSuccess, LogInFailure, Logout } from '../actions/auth.actions';
+import { AuthActionTypes, AuthActions } from '../actions/auth.actions';
 
 export const AUTH_KEY = 'AUTH';
 

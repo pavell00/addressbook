@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-const APP_PREFIX = 'ANMS-';
+export const APP_PREFIX = 'ANMS-';
 
 @Injectable()
 export class LocalStorageService {
@@ -34,5 +34,9 @@ export class LocalStorageService {
 
   getItem(key: string) {
     return JSON.parse(localStorage.getItem(`${APP_PREFIX}${key}`));
+  }
+
+  deleteItem(key: string): void {
+    localStorage.removeItem(`${APP_PREFIX}${key}`);
   }
 }

@@ -1,16 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Action } from '@ngrx/store';
-import { Actions, Effect } from '@ngrx/effects';
+import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
-import { map, switchMap, throttle } from 'rxjs/operators';
+//import { map, switchMap, throttle } from 'rxjs/operators';
+
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/catch';
 import { tap } from 'rxjs/operators';
 
 import { LocalStorageService } from '../../local-storage/local-storage.service';
 import { DataService } from '../../services/data.service';
 
 import { AUTH_KEY } from '../reducers/auth.reducer';
-import { AuthActionTypes, Login, LogInFailure, LogInSuccess, Logout, AuthActions } from '../actions/auth.actions';
+import { APP_PREFIX } from '../../local-storage/local-storage.service';
+import { AuthActionTypes, LogIn, LogInFailure, LogInSuccess, LogOut, AuthActions } from '../actions/auth.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -21,71 +27,49 @@ export class AuthEffects {
     private dataService: DataService
   ) {}
 
-  @Effect({ dispatch: false })
-  login(): Observable<Action> {
-    return this.actions$
-      .ofType(AuthActionTypes.LOGIN)
-      .pipe(
-        tap((action: any) => {action.payload}),
-        tap(action =>
-          this.localStorageService.setItem(AUTH_KEY, { isAuthenticated: true })
-        ),
-        map((action: any) => action.payload),
-        switchMap(payload => {
-          return this.dataService.logIn(payload.email, payload.password).pipe(
-            tap((user) => {
-              console.log(user);
-            }))
-            
-              //return new LogInSuccess({token: user.token, email: payload.email});
-            })
-            /*.catch((error) => {
-              console.log(error);
-              return Observable.of(new LogInFailure({ error: error }));
-            });*/
-        );
-  }
-  
-  
-  @Effect({ dispatch: false })
-  LogInSuccess(): Observable<any> { 
-    return this.actions$
-    .ofType(AuthActionTypes.LOGIN_SUCCESS)
-    .pipe(
-      tap((user) => {
-        localStorage.setItem('token', user.payload.token);
-        this.router.navigateByUrl('/addressbook');
-      })
-  );
-}
-
-@Effect({ dispatch: false })
-LogInFailure(): Observable<any> {
-  return this.actions$.ofType(AuthActionTypes.LOGIN_FAILURE);
-}
-
-/*  @Effect()
+  @Effect()
   LogIn: Observable<any> = this.actions$
     .ofType(AuthActionTypes.LOGIN)
     .map((action: LogIn) => action.payload)
     .switchMap(payload => {
-      return this.authService.logIn(payload.email, payload.password)
+      return this.dataService.logIn(payload.email, payload.password)
         .map((user) => {
-          console.log(user);
           return new LogInSuccess({token: user.token, email: payload.email});
         })
         .catch((error) => {
           console.log(error);
           return Observable.of(new LogInFailure({ error: error }));
         });
-    });*/
+    });
 
   @Effect({ dispatch: false })
-  logout(): Observable<Action> {
+  LogInSuccess: Observable<any> = this.actions$.pipe(
+    ofType(AuthActionTypes.LOGIN_SUCCESS),
+    tap((user) => {
+        localStorage.setItem(APP_PREFIX + 'TOKEN', user.payload.token);
+        this.router.navigateByUrl('/addressbook');
+    }
+    ));
+
+  /*@Effect({ dispatch: false })
+  LogInFailure(): Observable<any> {
+    return this.actions$.ofType(AuthActionTypes.LOGIN_FAILURE);
+  }*/
+
+  @Effect({ dispatch: false })
+  LogInFailure: Observable<any> = this.actions$.pipe(
+    ofType(AuthActionTypes.LOGIN_FAILURE)
+    //,
+    //tap(action => {this.router.navigate(['/login'])})
+  )
+
+  @Effect({ dispatch: false })
+  logOut(): Observable<Action> {
     return this.actions$.ofType(AuthActionTypes.LOGOUT).pipe(
       tap(action => {
-        this.router.navigate(['']);
+        this.router.navigate(['/login']);
         this.localStorageService.setItem(AUTH_KEY, { isAuthenticated: false });
+        this.localStorageService.deleteItem('TOKEN');
       })
     );
   }
