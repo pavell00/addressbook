@@ -34,10 +34,14 @@ export class AuthEffects {
     .switchMap(payload => {
       return this.dataService.logIn(payload.email, payload.password)
         .map((user) => {
-          return new LogInSuccess({token: user.token, email: payload.email});
+          if (user.token) {
+            return new LogInSuccess({token: user.token, email: payload.email});
+          } else {
+            throw(new Error('Authentication failed. Wrong password.'));
+          }
         })
         .catch((error) => {
-          console.log(error);
+          //console.log(error);
           return Observable.of(new LogInFailure({ error: error }));
         });
     });
@@ -47,6 +51,7 @@ export class AuthEffects {
     ofType(AuthActionTypes.LOGIN_SUCCESS),
     tap((user) => {
         localStorage.setItem(APP_PREFIX + 'TOKEN', user.payload.token);
+        this.localStorageService.setItem(AUTH_KEY, { isAuthenticated: true });
         this.router.navigateByUrl('/addressbook');
     }
     ));

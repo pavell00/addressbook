@@ -30,16 +30,14 @@
         [src]="logo"/> Angular NgRx Material AdressBook on Active Directory</span>
 
       <span *ngIf="isAuthenticated" class="d-none d-md-inline">
-          <button mat-button class="nav-button" *ngFor="let item of navigation"
-           [routerLink]="[item.link]" routerLinkActive="active">
-            {{item.label}}
-          </button>
-        </span>
-
-      <button mat-icon-button routerLink="settings" class="d-none d-sm-inline">
-        <mat-icon fontSet="fas" fontIcon="fa-cog"></mat-icon>
-      </button>
-
+        <button mat-button class="nav-button" *ngFor="let item of navigation"
+          [routerLink]="[item.link]" routerLinkActive="active">
+          {{item.label}}
+        </button>
+        <button mat-icon-button routerLink="settings" class="d-none d-sm-inline">
+            <mat-icon fontSet="fas" fontIcon="fa-cog"></mat-icon>
+        </button>
+      </span>
       <!--<button mat-button class="sign-in-button "
               *ngIf="!isAuthenticated"
               (click)="onLoginClick()">
