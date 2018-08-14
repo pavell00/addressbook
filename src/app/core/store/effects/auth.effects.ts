@@ -17,6 +17,7 @@ import { DataService } from '../../services/data.service';
 import { AUTH_KEY } from '../reducers/auth.reducer';
 import { APP_PREFIX } from '../../local-storage/local-storage.service';
 import { AuthActionTypes, LogIn, LogInFailure, LogInSuccess, LogOut, AuthActions } from '../actions/auth.actions';
+import { UIService } from '../../services/ui.service';
 
 @Injectable()
 export class AuthEffects {
@@ -24,7 +25,8 @@ export class AuthEffects {
     private actions$: Actions<Action>,
     private localStorageService: LocalStorageService,
     private router: Router,
-    private dataService: DataService
+    private dataService: DataService,
+    private uiService: UIService
   ) {}
 
   @Effect()
@@ -42,6 +44,7 @@ export class AuthEffects {
         })
         .catch((error) => {
           //console.log(error);
+          this.uiService.showShackBar(error, null, 2000);
           return Observable.of(new LogInFailure({ error: error }));
         });
     });
@@ -67,7 +70,7 @@ export class AuthEffects {
     //,
     //tap(action => {this.router.navigate(['/login'])})
   )
-
+  
   @Effect({ dispatch: false })
   logOut(): Observable<Action> {
     return this.actions$.ofType(AuthActionTypes.LOGOUT).pipe(
