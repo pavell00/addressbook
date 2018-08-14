@@ -17,6 +17,8 @@ export function authReducer(
   action: AuthActions
 ): AuthState {
   switch (action.type) {
+    case AuthActionTypes.LOGIN:
+      return { ...state, isAuthenticated: false };
     case AuthActionTypes.LOGIN_SUCCESS: {
       return {
         ...state,
@@ -28,8 +30,6 @@ export function authReducer(
         errorMessage: null
       };
     }
-    case AuthActionTypes.LOGIN:
-      return { ...state, isAuthenticated: true };
     case AuthActionTypes.LOGIN_FAILURE: {
       return {
         ...state,
