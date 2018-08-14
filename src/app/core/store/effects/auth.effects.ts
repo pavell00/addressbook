@@ -39,7 +39,7 @@ export class AuthEffects {
           if (user.token) {
             return new LogInSuccess({token: user.token, email: payload.email});
           } else {
-            throw(new Error('Authentication failed. Wrong password.'));
+            throw(new Error(user.message));
           }
         })
         .catch((error) => {
