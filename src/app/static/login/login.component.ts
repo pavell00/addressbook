@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
     onSubmit(form: NgForm) {
         //console.log(form);
         const payload = {
-            email: form.value.username,
+            username: form.value.username,
             password: form.value.password
         };
         /*this.user = {username: form.value.username,

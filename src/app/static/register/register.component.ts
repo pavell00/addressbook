@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
-import { User } from '../../shared';
+import { Store } from '@ngrx/store';
+import { SignUp } from '../../core/store/actions/auth.actions';
 
 @Component({
     selector: 'anms-register',
@@ -8,17 +9,18 @@ import { User } from '../../shared';
     styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-    user: User = new User();
 
-    constructor() { }
+    constructor(private store: Store<any>) { }
 
     ngOnInit(): void { }
 
     onSubmit(form: NgForm) {
         //console.log(form)
-        this.user = {username: form.value.username,
-            password: form.value.password,
-            email: form.value.email
+        const payload = {
+            username: form.value.username,
+            email: form.value.email,
+            password: form.value.password
         }
+        this.store.dispatch(new SignUp(payload))
     }
 }

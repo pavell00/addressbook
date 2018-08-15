@@ -22,9 +22,9 @@ export class DataService {
     return localStorage.getItem('token');
   }
 
-  logIn(email: string, password: string): Observable<any> {
+  logIn(login: string, password: string): Observable<any> {
     const body = new HttpParams ()
-      .set('login', email)
+      .set('login', login)
       .set('password', password);
     
     const url = `${this.BASE_URL}/login`;
@@ -33,9 +33,9 @@ export class DataService {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }});
   }
 
-  signUp(email: string, password: string): Observable<User> {
+  signUp(login: string, password: string): Observable<any> {
     const url = `${this.BASE_URL}/register`;
-    return this.http.post<User>(url, {email, password});
+    return this.http.post<User>(url, {login, password});
   }
 
   getADUsers(): Observable<any[]> {

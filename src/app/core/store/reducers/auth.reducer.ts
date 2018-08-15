@@ -25,16 +25,36 @@ export function authReducer(
         isAuthenticated: true,
         user: {
           token: action.payload.token,
-          email: action.payload.email
+          username: action.payload.username
         },
-        errorMessage: null
+       // errorMessage: null
       };
     }
     case AuthActionTypes.LOGIN_FAILURE: {
       return {
         ...state,
         isAuthenticated: false,
-        errorMessage: 'Incorrect email and/or password.'
+        //errorMessage: 'Incorrect email and/or password.'
+      };
+    }
+    case AuthActionTypes.SIGNUP:
+      return { ...state, isAuthenticated: false };
+    case AuthActionTypes.SIGNUP_SUCCESS: {
+      return {
+        ...state,
+        isAuthenticated: true,
+        user: {
+          token: action.payload.token,
+          username: action.payload.username
+        },
+        //rrorMessage: null
+      };
+    }
+    case AuthActionTypes.SIGNUP_FAILURE: {
+      return {
+        ...state,
+        isAuthenticated: false,
+        //errorMessage: 'That email is already in use.'
       };
     }
     case AuthActionTypes.LOGOUT:
