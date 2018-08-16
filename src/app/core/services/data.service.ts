@@ -33,9 +33,9 @@ export class DataService {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }});
   }
 
-  signUp(login: string, password: string): Observable<any> {
+  signUp(login: string, email: string, password: string): Observable<any> {
     const url = `${this.BASE_URL}/register`;
-    return this.http.post<User>(url, {login, password});
+    return this.http.post<User>(url, {login, email, password});
   }
 
   getADUsers(): Observable<any[]> {

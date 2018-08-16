@@ -38,14 +38,17 @@ export function authReducer(
       };
     }
     case AuthActionTypes.SIGNUP:
-      return { ...state, isAuthenticated: false };
+      return { ...state, 
+        isAuthenticated: false,
+      };
     case AuthActionTypes.SIGNUP_SUCCESS: {
       return {
         ...state,
-        isAuthenticated: true,
+        isAuthenticated: false,
         user: {
           token: action.payload.token,
-          username: action.payload.username
+          username: action.payload.username,
+          email: action.payload.email
         },
         //rrorMessage: null
       };
@@ -58,7 +61,8 @@ export function authReducer(
       };
     }
     case AuthActionTypes.LOGOUT:
-      return { ...state, isAuthenticated: false };
+      //return { ...state, isAuthenticated: false };
+      return initialState;
 
     default:
       return state;

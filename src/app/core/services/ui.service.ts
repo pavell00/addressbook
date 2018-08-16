@@ -6,9 +6,10 @@ export class UIService {
     
     constructor(private snackbar: MatSnackBar) {}
 
-    showShackBar(message, action, duration) {
+    showShackBar(message, action, duration, cssClass) {
         this.snackbar.open(message, action, {
-            duration: duration
-        });
+            duration: duration,
+            panelClass: cssClass
+        })
     }
 }

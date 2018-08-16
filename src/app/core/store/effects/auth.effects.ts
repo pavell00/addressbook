@@ -45,7 +45,7 @@ export class AuthEffects {
         })
         .catch((error) => {
           //console.log(error);
-          this.uiService.showShackBar(error, null, 2000);
+          this.uiService.showShackBar(error, null, 3000, 'red-snackbar');
           return Observable.of(new LogInFailure({ error: error }));
         });
     });
@@ -71,17 +71,18 @@ export class AuthEffects {
     .ofType(AuthActionTypes.SIGNUP)
     .map((action: SignUp) => action.payload)
     .switchMap(payload => {
-      return this.dataService.signUp(payload.username, payload.password)
+      return this.dataService.signUp(payload.username, payload.email, payload.password)
         .map((result) => {
           if (result.success == true) {
-            return new SignUpSuccess({token: user.token, username: payload.username});
+            //return new SignUpSuccess({token: user.token, username: payload.username});
+            return new SignUpSuccess(result);
           } else {
-            throw(new Error(user));
+            throw(new Error(result.message));
           }
         })
         .catch((error) => {
           //console.log(error);
-          this.uiService.showShackBar(error, null, 2000);
+          this.uiService.showShackBar(error, null, 3000, 'red-snackbar');
           return Observable.of(new SignUpFailure({ error: error }));
         });
   });
@@ -89,16 +90,18 @@ export class AuthEffects {
   @Effect({ dispatch: false })
   SignUpSuccess: Observable<any> = this.actions$.pipe(
     ofType(AuthActionTypes.SIGNUP_SUCCESS),
-    tap((user) => {
-      localStorage.setItem('token', user.payload.token);
-      this.router.navigateByUrl('/');
+    tap((result) => {
+      //localStorage.setItem('token', user.payload.token);
+      this.uiService.showShackBar('User created successful. Please login', null, 3000, 'green-snackbar');
+      this.router.navigateByUrl('/login');
     })
-  );
+  )
 
   @Effect({ dispatch: false })
   SignUpFailure: Observable<any> = this.actions$.pipe(
     ofType(AuthActionTypes.SIGNUP_FAILURE)
-  );
+      //this.router.navigateByUrl('/login');
+  )
 
   @Effect({ dispatch: false })
   logOut(): Observable<Action> {
