@@ -11,6 +11,8 @@ import { StaticModule } from './static';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { CompareValidatorDirective } from './shared/directives/compare-validator.directive';
+import { GreenDirective } from './shared/directives/test.directive';
 
 @NgModule({
   imports: [
@@ -31,7 +33,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
     FlexLayoutModule
   ],
-  declarations: [AppComponent],
+  declarations: [AppComponent, CompareValidatorDirective, GreenDirective],
   providers: [],
   bootstrap: [AppComponent]
 })

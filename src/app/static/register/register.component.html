@@ -13,7 +13,18 @@
             <input type="password" matInput placeholder="Your password" ngModel name="password" required minlength="6" #pwInput="ngModel">
             <mat-hint align="end">{{pwInput.value?.length}}/ 6</mat-hint>
             <mat-error>Has to be at least 6 characters long.</mat-error>
-        </mat-form-field><br>
+        </mat-form-field>
+        <mat-form-field>
+            <input type="password" matInput placeholder="Your password confirm" ngModel name="passwordConfirm" required #pwConfirm="ngModel" compare="password">
+            <!--<mat-hint align="end">{{pwConfirm.value?.length}}/ 6</mat-hint>-->
+            <!--<mat-error>Has to be at least 6 characters long.</mat-error>-->
+            <div *ngIf="pwConfirm.invalid && (pwConfirm.dirty || pwConfirm.touched)">
+                <mat-error *ngIf="pwConfirm.errors['compare']">Password confirm do not match.</mat-error>
+            </div>
+        </mat-form-field>
+        <br>
         <button type="submit" mat-raised-button color="primary">Register</button>
     </form>
 </section>
+<p green>Highlight me!</p>
+{{pwConfirm.errors | json}}

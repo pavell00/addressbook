@@ -21,6 +21,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { BigInputComponent } from './big-input/big-input.component';
 import { BigInputActionComponent } from './big-input/big-input-action.component';
+//import { CompareValidatorDirective } from './directives/compare-validator.directive';
 
 @NgModule({
   imports: [
