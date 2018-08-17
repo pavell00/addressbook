@@ -23,15 +23,4 @@ export class CompareValidatorDirective implements Validator {
         }
         return controlToCompare && controlToCompare.value !== c.value ? { 'compare': true } : null;
     }
-    
-    
-    /*validate(c: AbstractControl): {[key: string]: any} | null {
-        console.log('controlNameToCompare ' + this.controlNameToCompare);
-        const controlToCompare = c.parent.get(this.controlNameToCompare);
-        if (controlToCompare && controlToCompare.value !== c.value) {
-            return {'notEqual': true};
-        }
-        return null;
-    }*/
-
 }

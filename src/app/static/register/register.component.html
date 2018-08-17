@@ -1,30 +1,42 @@
 <section class="register-card">
-    <form  fxLayout="column" fxLayoutAlign="center center" #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <form [formGroup]="userRegistrationForm" novalidate fxLayout="column" fxLayoutAlign="center center">
         <mat-form-field>
-            <input type="text" matInput placeholder="Enter your user name" ngModel name="username" required minlength="4" #userInput="ngModel">
-            <mat-error *ngIf="userInput.hasError('required')">Must be more than 3 characters.</mat-error>
+            <input matInput placeholder="Enter your user name" type="text" formControlName="fullName">
+            <mat-error>
+                {{errors.fullName}}
+            </mat-error>
         </mat-form-field>
-        <mat-form-field>
-            <input type="email" matInput placeholder="Your email" ngModel name="email" email required #emailInput="ngModel">
-            <mat-error *ngIf="emailInput.hasError('required')">Field must not empty</mat-error>
-            <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid</mat-error>
-        </mat-form-field>
-        <mat-form-field hintLabel="must be more than 5 characters">
-            <input type="password" matInput placeholder="Your password" ngModel name="password" required minlength="6" #pwInput="ngModel">
-            <mat-hint align="end">{{pwInput.value?.length}}/ 6</mat-hint>
-            <mat-error>Has to be at least 6 characters long.</mat-error>
-        </mat-form-field>
-        <mat-form-field>
-            <input type="password" matInput placeholder="Your password confirm" ngModel name="passwordConfirm" required #pwConfirm="ngModel" compare="password">
-            <!--<mat-hint align="end">{{pwConfirm.value?.length}}/ 6</mat-hint>-->
-            <!--<mat-error>Has to be at least 6 characters long.</mat-error>-->
-            <div *ngIf="pwConfirm.invalid && (pwConfirm.dirty || pwConfirm.touched)">
-                <mat-error *ngIf="pwConfirm.errors['compare']">Password confirm do not match.</mat-error>
-            </div>
-        </mat-form-field>
-        <br>
-        <button type="submit" mat-raised-button color="primary">Register</button>
+    
+        <div formGroupName="emailGroup">
+            <mat-form-field>
+                <input matInput placeholder="Email address" type="email" formControlName="email">
+                <mat-error>
+                    {{errors.email}}
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>    
+                <input matInput placeholder="Confirm email address" type="email" formControlName="confirmEmail" [errorStateMatcher]="confirmValidParentMatcher">
+                <mat-error>
+                    {{errors.confirmEmail}}
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div formGroupName="passwordGroup">
+            <mat-form-field>
+                <input matInput placeholder="Password" type="password" formControlName="password">
+                <mat-error>
+                    {{errors.password}}
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Confirm password" type="password" formControlName="confirmPassword" [errorStateMatcher]="confirmValidParentMatcher">
+                <mat-error>
+                    {{errors.confirmPassword}}
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <button mat-raised-button color="primary" [disabled]="userRegistrationForm.invalid" (click)="onSubmit()">Register</button>
     </form>
 </section>
-<p green>Highlight me!</p>
-{{pwConfirm.errors | json}}
