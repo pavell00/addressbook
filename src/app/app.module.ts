@@ -5,6 +5,8 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '@app/shared';
 import { CoreModule } from '@app/core';
 
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+
 import { SettingsModule } from './settings';
 import { StaticModule } from './static';
 
@@ -32,7 +34,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FlexLayoutModule
   ],
   declarations: [AppComponent],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
