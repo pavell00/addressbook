@@ -36,7 +36,9 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(request)
       .catch((response: any) => {
         if (response instanceof HttpErrorResponse && response.status === 401) {
-          console.log(response);
+            localStorage.removeItem('ANMS-TOKEN');
+            this.router.navigateByUrl('/log-in');
+            console.log('ErrorInterceptor '+response);
         }
         return Observable.throw(response);
       });

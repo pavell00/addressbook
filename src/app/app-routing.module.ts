@@ -19,13 +19,12 @@ const routes: Routes = [
     redirectTo: 'about',
     pathMatch: 'full'
   },
-  {
+//  {
     /*path: 'addressbook',
     redirectTo: '/addressbook',
     pathMatch: 'full'*/
-    path: 'addressbook',
-    component: AddressbookComponent
-  },
+//    path: 'addressbook', component: AddressbookComponent, canActivate: [AuthGuard]
+//  },
   {
     path: 'settings',
     component: SettingsComponent,

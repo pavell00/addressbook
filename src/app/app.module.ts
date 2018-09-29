@@ -34,7 +34,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FlexLayoutModule
   ],
   declarations: [AppComponent],
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
+  //providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
