@@ -54,7 +54,7 @@ export class AuthEffects {
   LogInSuccess: Observable<any> = this.actions$.pipe(
     ofType(AuthActionTypes.LOGIN_SUCCESS),
     tap((user) => {
-        localStorage.setItem(APP_PREFIX + 'TOKEN', user.payload.token);
+        localStorage.setItem(APP_PREFIX + 'TOKEN', '{"token":"'+user.payload.token+'"}');
         this.localStorageService.setItem(AUTH_KEY, { isAuthenticated: true });
         this.router.navigateByUrl('/addressbook');
     }
