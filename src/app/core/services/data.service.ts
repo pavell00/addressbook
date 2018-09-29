@@ -18,26 +18,6 @@ export class DataService {
   
   constructor(private http: HttpClient) { }
 
-  getToken(): string {
-    return localStorage.getItem('token');
-  }
-
-  logIn(login: string, password: string): Observable<any> {
-    const body = new HttpParams ()
-      .set('login', login)
-      .set('password', password);
-    
-    const url = `${this.BASE_URL}/login`;
-    //return this.http.post<User>(url, {email, password});
-    return this.http.post<User>(url, body.toString(), {
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }});
-  }
-
-  signUp(login: string, email: string, password: string): Observable<any> {
-    const url = `${this.BASE_URL}/register`;
-    return this.http.post<User>(url, {login, email, password});
-  }
-
   getADUsers(): Observable<any[]> {
     //return this.http.get<Employee[]>(this.dataUrl);
     return this.http.get<any[]>(this.dataUrl)

@@ -12,7 +12,7 @@ import 'rxjs/add/operator/catch';
 import { tap } from 'rxjs/operators';
 
 import { LocalStorageService } from '../../local-storage/local-storage.service';
-import { DataService } from '../../services/data.service';
+import { AuthService } from '../../services/auth.service';
 
 import { AUTH_KEY } from '../reducers/auth.reducer';
 import { APP_PREFIX } from '../../local-storage/local-storage.service';
@@ -26,7 +26,7 @@ export class AuthEffects {
     private actions$: Actions<Action>,
     private localStorageService: LocalStorageService,
     private router: Router,
-    private dataService: DataService,
+    private authService: AuthService,
     private uiService: UIService
   ) {}
 
@@ -35,7 +35,7 @@ export class AuthEffects {
     .ofType(AuthActionTypes.LOGIN)
     .map((action: LogIn) => action.payload)
     .switchMap(payload => {
-      return this.dataService.logIn(payload.username, payload.password)
+      return this.authService.logIn(payload.username, payload.password)
         .map((user) => {
           if (user.token) {
             return new LogInSuccess({token: user.token, username: payload.username});
@@ -71,7 +71,7 @@ export class AuthEffects {
     .ofType(AuthActionTypes.SIGNUP)
     .map((action: SignUp) => action.payload)
     .switchMap(payload => {
-      return this.dataService.signUp(payload.username, payload.email, payload.password)
+      return this.authService.signUp(payload.username, payload.email, payload.password)
         .map((result) => {
           if (result.success == true) {
             //return new SignUpSuccess({token: user.token, username: payload.username});

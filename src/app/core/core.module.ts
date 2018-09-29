@@ -1,6 +1,6 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MetaReducer, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { storeFreeze } from 'ngrx-store-freeze';
@@ -16,6 +16,8 @@ import { AuthGuardService } from './auth/auth-guard.service';
 import { AnimationsService } from './animations/animations.service';
 import { DataService } from './services/data.service';
 import { UIService } from './services/ui.service';
+import { AuthService } from './services/auth.service';
+import { TokenInterceptor, ErrorInterceptor } from './services/token.interceptor';
 
 export const metaReducers: MetaReducer<any>[] = [initStateFromLocalStorage];
 
@@ -42,7 +44,17 @@ if (!environment.production) {
     EffectsModule.forRoot([AuthEffects])
   ],
   declarations: [],
-  providers: [LocalStorageService, AuthGuardService, AnimationsService, DataService, UIService]
+  providers: [LocalStorageService, AuthGuardService, AnimationsService, 
+    DataService, UIService, AuthService, {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }, {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true
+    }
+  ]
 })
 export class CoreModule {
   constructor(
