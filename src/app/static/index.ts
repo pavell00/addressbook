@@ -4,4 +4,4 @@ export * from './about/about.component';
 export * from './detail/detail.component';
 export * from './login/login.component';
 export * from './register/register.component';
-export * from './addressbook/addressbook.component';
+export * from './employeebook/employeebook.component';

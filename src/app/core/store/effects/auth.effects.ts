@@ -40,11 +40,12 @@ export class AuthEffects {
           if (user.token) {
             return new LogInSuccess({token: user.token, username: payload.username});
           } else {
+            //console.log('throw '+user.message)
             throw(new Error(user.message));
           }
         })
         .catch((error) => {
-          //console.log(error);
+          console.log(error);
           this.uiService.showShackBar(error, null, 3000, 'red-snackbar');
           return Observable.of(new LogInFailure({ error: error }));
         });
@@ -56,7 +57,7 @@ export class AuthEffects {
     tap((user) => {
         localStorage.setItem(APP_PREFIX + 'TOKEN', '{"token":"'+user.payload.token+'"}');
         this.localStorageService.setItem(AUTH_KEY, { isAuthenticated: true });
-        this.router.navigateByUrl('/addressbook');
+        this.router.navigateByUrl('/employeebook');
     }
     ));
 

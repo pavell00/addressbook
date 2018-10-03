@@ -36,10 +36,11 @@ export class AppComponent implements OnInit, OnDestroy {
   isProd = env.production;
   envName = env.envName;
   version = env.versions.app;
+  authHost = env.authServiceHost;
   year = new Date().getFullYear();
   logo = require('../assets/logo.png');
   navigation = [
-    { link: 'addressbook', label: 'Addressbook' }
+    { link: 'employeebook', label: 'Employeebook' }
     /*{ link: 'about', label: 'About' },
     { link: 'features', label: 'Features' },
     { link: 'examples', label: 'Examples' }*/

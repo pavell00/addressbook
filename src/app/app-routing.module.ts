@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { SettingsComponent } from './settings';
-import { LoginComponent, RegisterComponent, AddressbookComponent } from './static';
+import { LoginComponent, RegisterComponent, EmployeebookComponent } from './static';
 
 const routes: Routes = [
   {
@@ -20,10 +20,10 @@ const routes: Routes = [
     pathMatch: 'full'
   },
 //  {
-    /*path: 'addressbook',
-    redirectTo: '/addressbook',
+    /*path: 'employeebook',
+    redirectTo: '/employeebook',
     pathMatch: 'full'*/
-//    path: 'addressbook', component: AddressbookComponent, canActivate: [AuthGuard]
+//    path: 'employeebook', component: EmployeebookComponent, canActivate: [AuthGuard]
 //  },
   {
     path: 'settings',

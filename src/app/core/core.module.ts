@@ -45,7 +45,8 @@ if (!environment.production) {
   ],
   declarations: [],
   providers: [LocalStorageService, AuthGuardService, AnimationsService, 
-    DataService, UIService, AuthService, {
+    DataService, UIService, AuthService, 
+    {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true

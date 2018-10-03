@@ -7,11 +7,11 @@ import {Subject} from "rxjs/Subject";
 import 'rxjs/add/operator/takeUntil';
 
 @Component({
-  selector: 'anms-addressbook',
-  templateUrl: './addressbook.component.html',
-  styleUrls: ['./addressbook.component.scss']
+  selector: 'anms-employeebook',
+  templateUrl: './employeebook.component.html',
+  styleUrls: ['./employeebook.component.scss']
 })
-export class AddressbookComponent implements OnInit {
+export class EmployeebookComponent implements OnInit {
 
   componentDestroyed$: Subject<boolean> = new Subject();//for unsubscribe observers
   constructor(private dataService: DataService) {}

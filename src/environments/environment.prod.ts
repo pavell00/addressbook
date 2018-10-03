@@ -5,6 +5,7 @@ export const environment = {
   envName: 'PROD',
   production: true,
   test: false,
+  authServiceHost: 'http://ws-bratushka:3000',
   versions: {
     app: packageJson.version,
     angular: packageJson.dependencies['@angular/core'],

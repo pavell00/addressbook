@@ -3,12 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AboutComponent } from './about/about.component';
 import { FeaturesComponent } from './features/features.component';
-import { AddressbookComponent } from './addressbook/addressbook.component';
+import { EmployeebookComponent } from './employeebook/employeebook.component';
 import { AuthGuardService as AuthGuard } from '../core';
 
 const routes: Routes = [
   {
-    path: 'addressbook', component: AddressbookComponent, data: { title: 'addressbook'}, canActivate: [AuthGuard] 
+    path: 'employeebook', component: EmployeebookComponent, data: { title: 'employeebook'}, canActivate: [AuthGuard] 
   },
   {
     path: 'features', component: FeaturesComponent, data: { title: 'Features' }

@@ -3,11 +3,12 @@ import { HttpClient, HttpHeaders, HttpResponse, HttpParams } from '@angular/comm
 import {Observable} from 'rxjs';
 
 import { User } from '../../shared/user';
+import { environment as env } from '@env/environment';
 
 @Injectable()
 export class AuthService {
 
-  private BASE_URL = 'http://localhost:3000';
+  private BASE_URL = env.authServiceHost;
   
   constructor(private http: HttpClient) { }
 

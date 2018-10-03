@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StaticRoutingModule } from './static-routing.module';
 import { AboutComponent } from './about/about.component';
 import { FeaturesComponent } from './features/features.component';
-import { AddressbookComponent } from './addressbook/addressbook.component';
+import { EmployeebookComponent } from './employeebook/employeebook.component';
 import { DetailComponent } from './detail/detail.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -23,7 +23,7 @@ import { RegisterComponent } from './register/register.component';
   declarations: [
     AboutComponent,
     FeaturesComponent,
-    AddressbookComponent,
+    EmployeebookComponent,
     DetailComponent,
     LoginComponent,
     RegisterComponent
