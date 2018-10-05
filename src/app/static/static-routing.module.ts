@@ -8,7 +8,7 @@ import { AuthGuardService as AuthGuard } from '../core';
 
 const routes: Routes = [
   {
-    path: 'employeebook', component: EmployeebookComponent, data: { title: 'employeebook'}, canActivate: [AuthGuard] 
+    path: 'employeebook', component: EmployeebookComponent, data: { title: 'eBook'}, canActivate: [AuthGuard] 
   },
   {
     path: 'features', component: FeaturesComponent, data: { title: 'Features' }
