@@ -20,7 +20,7 @@ export class DataService {
 
   getADUsers(): Observable<any[]> {
     //return this.http.get<Employee[]>(this.dataUrl);
-    return this.http.get<any[]>(this.dataUrl)
+    return this.http.get<User[]>(this.dataUrl)
       .pipe(
        
       )
