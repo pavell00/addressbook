@@ -12,7 +12,7 @@ import {
   AnimationsService,
   selectorAuth,
   routeAnimations
-} from '@app/core';
+} from './core';
 import { environment as env } from '@env/environment';
 
 import {

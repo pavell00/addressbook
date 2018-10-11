@@ -4,4 +4,8 @@ export * from './animations/animations.service';
 export * from './store/reducers/auth.reducer';
 export * from './store/actions/auth.actions';
 export * from './auth/auth-guard.service';
+export * from './services/auth.service';
+export * from './services/data.service';
+export * from './services/token.interceptor';
+export * from './services/ui.service';
 export * from './core.module';

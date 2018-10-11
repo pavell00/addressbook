@@ -6,7 +6,7 @@ import { JwtHelper } from 'angular2-jwt';
 import { User } from '../../shared/user';
 import { environment as env } from '@env/environment';
 import { Store } from '@ngrx/store';
-import { LogOut } from '@app/core';
+import { LogOut } from '../store/actions/auth.actions';
 
 @Injectable()
 export class AuthService {

@@ -11,7 +11,7 @@ import {
   catchError
 } from 'rxjs/operators';
 
-import { LocalStorageService } from '@app/core';
+import { LocalStorageService } from '../../core';
 
 import {
   ActionStockMarketRetrieve,

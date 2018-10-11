@@ -4,7 +4,7 @@ import { Actions, Effect } from '@ngrx/effects';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { LocalStorageService, AnimationsService } from '@app/core';
+import { LocalStorageService, AnimationsService } from '../core';
 
 import {
   SETTINGS_KEY,

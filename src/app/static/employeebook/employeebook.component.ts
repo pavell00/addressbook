@@ -3,7 +3,7 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { environment as env } from '@env/environment';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '@app/core';
 import { DataService } from '../../core/services/data.service';
-import { AuthService } from '../../core/services/auth.service';
+import { AuthService } from '../../core';
 import {Subject} from "rxjs/Subject";
 import 'rxjs/add/operator/takeUntil';
 import { Store } from '@ngrx/store';
