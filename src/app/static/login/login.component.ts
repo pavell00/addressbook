@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators , NgForm} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DataService } from '../../core/services/data.service';
+import { AuthService } from '../../core/services/auth.service';
 import {Subject} from "rxjs/Subject";
 import { environment as env } from '@env/environment';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '@app/core';
@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit {
     
     routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
     versions = env.versions;
-    componentDestroyed$: Subject<boolean> = new Subject();//for unsubscribe observers
 
     loginForm: FormGroup;
     loading = false;
@@ -41,6 +40,7 @@ export class LoginComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private store: Store<any>,
+        private auth: AuthService
         //private authenticationService: AuthenticationService,
         //private alertService: AlertService
     ) { }
@@ -48,6 +48,10 @@ export class LoginComponent implements OnInit {
     ngOnInit(): void {
         // reset login status
         //this.authenticationService.logout();
+
+        if (!this.auth.isTokenExpired()) {
+            this.router.navigateByUrl('employeebook');
+        }
 
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'login';

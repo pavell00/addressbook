@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { environment as env } from '@env/environment';
 
 import {
   selectorSettings,
@@ -21,6 +22,11 @@ import {
 export class SettingsComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject<void>();
   settings: SettingsState;
+
+  isProd = env.production;
+  envName = env.envName;
+  version = env.versions.app;
+  authHost = env.authServiceHost;
 
   themes = [
     { value: 'DEFAULT-THEME', label: 'Blue' },

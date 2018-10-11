@@ -3,8 +3,11 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { environment as env } from '@env/environment';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '@app/core';
 import { DataService } from '../../core/services/data.service';
+import { AuthService } from '../../core/services/auth.service';
 import {Subject} from "rxjs/Subject";
 import 'rxjs/add/operator/takeUntil';
+import { Store } from '@ngrx/store';
+import { LogOut } from '@app/core';
 
 @Component({
   selector: 'anms-employeebook',
@@ -14,7 +17,7 @@ import 'rxjs/add/operator/takeUntil';
 export class EmployeebookComponent implements OnInit {
 
   componentDestroyed$: Subject<boolean> = new Subject();//for unsubscribe observers
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService, private auth: AuthService, private store: Store<any>) {}
 
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   versions = env.versions;
@@ -69,6 +72,7 @@ export class EmployeebookComponent implements OnInit {
   }
 
   onSearch(query: string = '') {
+    this.checkToken();
     this.source.setFilter([
         // fields we want to include in the search
         {
@@ -101,5 +105,12 @@ export class EmployeebookComponent implements OnInit {
   ngOnDestroy() {
       this.componentDestroyed$.next(true);
       this.componentDestroyed$.complete();
+  }
+
+  checkToken() {
+    //console.log(this.auth.isTokenExpired())
+    if (this.auth.isTokenExpired()) {
+      this.store.dispatch(new LogOut());
+    }
   }
 }
