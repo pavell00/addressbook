@@ -68,3 +68,9 @@ mat-card {
     position: relative;
   }
 }
+
+@media (max-width: 766px) {
+  mat-card {
+    display: none;
+  }
+}

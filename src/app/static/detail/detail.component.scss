@@ -1,3 +1,11 @@
+@import '../../../styles-variables';
+
+@media (max-width: map-get($grid-breakpoints, sm)) {
+    mat-card-subtitle {
+      min-height: auto;
+    }
+  }
+
 .layer {
     overflow: scroll; /* Добавляем полосы прокрутки */
     width: auto; /* Ширина блока */
