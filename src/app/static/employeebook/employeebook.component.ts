@@ -4,10 +4,16 @@ import { environment as env } from '@env/environment';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '@app/core';
 import { DataService } from '../../core/services/data.service';
 import { AuthService } from '../../core';
-import {Subject} from "rxjs/Subject";
+
+import { Subject } from "rxjs/Subject";
+import { of } from "rxjs";
 import 'rxjs/add/operator/takeUntil';
+import { takeUntil, distinct, flatMap } from 'rxjs/operators';
+
 import { Store } from '@ngrx/store';
 import { LogOut } from '@app/core';
+
+import { Employee } from '../../core/models/employee';
 
 @Component({
   selector: 'anms-employeebook',
@@ -23,6 +29,7 @@ export class EmployeebookComponent implements OnInit {
   versions = env.versions;
   source = new LocalDataSource();
   selectedItem: any;
+  dsEmployees : Employee[] = [];
 
   settings = {
     actions: {
@@ -112,5 +119,26 @@ export class EmployeebookComponent implements OnInit {
     if (this.auth.isTokenExpired()) {
       this.store.dispatch(new LogOut());
     }
+  }
+
+  onSearchMobileEdition(str: string = '') {
+    this.dataService.getADUsersJSONfile(str);
+    this.dataService.empl.subscribe(e => {
+      let a = of(e);
+      //console.log(e.length);
+      this.dsEmployees = [];
+      a.pipe(
+        takeUntil(this.componentDestroyed$),
+        flatMap(a => a),
+        distinct(w=>w.Name)
+      ).subscribe(x => {
+        this.dsEmployees.push(x);
+        //console.log(x);
+        })
+      })
+  }
+
+  onExpandPanel(e: Employee) {
+    
   }
 }

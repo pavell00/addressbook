@@ -18,6 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTableModule, MatExpansionModule, MatFormFieldModule } from '@angular/material';
 
 import { BigInputComponent } from './big-input/big-input.component';
 import { BigInputActionComponent } from './big-input/big-input-action.component';
@@ -43,7 +44,8 @@ import { CompareValidatorDirective } from './directives/compare-validator.direct
     MatIconModule,
     MatTooltipModule,
     MatSnackBarModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatTableModule, MatExpansionModule, MatFormFieldModule
   ],
   declarations: [BigInputComponent, BigInputActionComponent, CompareValidatorDirective],
   exports: [
@@ -66,6 +68,7 @@ import { CompareValidatorDirective } from './directives/compare-validator.direct
     MatTooltipModule,
     MatSnackBarModule,
     MatSlideToggleModule,
+    MatTableModule, MatExpansionModule, MatFormFieldModule,
 
     BigInputComponent,
     BigInputActionComponent

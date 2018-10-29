@@ -26,3 +26,33 @@
     </div>
   </div>
 </div>
+
+<div class="mobileWindow">
+  <div class="background">
+      <div class="gradient">
+        <div class="container">
+          <!--<div class="row">
+            <div class="col-sm-12">
+                <input #search class="search" type="text" placeholder="Search..." (keydown.enter)="onSearchMobileEdition(search.value)">
+            </div>
+          </div>-->
+          <div class="row align-items-end">
+            
+            <div class="col-sm-12" [ngClass]="routeAnimationsElements">
+              <mat-form-field>
+                <input matInput #search class="search" type="text" placeholder="Search..." (keydown.enter)="onSearchMobileEdition(search.value)">
+              </mat-form-field>
+              
+              <mat-accordion>
+                <mat-expansion-panel (opened)="onExpandPanel(ds)" *ngFor="let ds of dsEmployees">
+                  <mat-expansion-panel-header>{{ds.Name}}</mat-expansion-panel-header>
+                  <mat-panel-description>{{ds.EmailAddress}} - {{ds.Office}} - {{ds.MobilePhone}}</mat-panel-description>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+  </div>        
+</div>
